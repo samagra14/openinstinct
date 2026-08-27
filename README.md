@@ -27,8 +27,6 @@ Text it a task. It can use a real browser, search the live web, work with files,
 | 💬 **Talk where you already talk** | Reach it by SMS, iMessage, email, or phone call. It replies quickly so you know it has started. |
 | 🌙 **Stay awake** | Run all day on a small VM, restart itself after a reboot, and keep working when your laptop is closed. |
 
-> **This is not a chatbot that only gives advice.** It can open websites, use tools, change files, and do the work for you.
-
 ## Things you can ask
 
 - "Check today's AI news. Pick one story and tell me why it matters."
@@ -42,17 +40,21 @@ Text it a task. It can use a real browser, search the live web, work with files,
 
 **You send a message → OpenInstinct does the work → You get the result**
 
-OpenInstinct runs quietly on a machine you control. A small Ubuntu VM is best because it stays awake. You can also run it on your own computer, but it will sleep when the computer sleeps.
+OpenInstinct can run on your Mac or Linux computer. For an assistant that stays available when your laptop is closed, we recommend a small Ubuntu 24.04 VM.
 
 ## Set up your own
 
-You need:
+Choose where to run it:
 
-- A small Ubuntu 24.04 VM
+- Your Mac or Linux computer
+- **Recommended:** a small Ubuntu 24.04 VM that stays awake
+
+You also need:
+
 - A ChatGPT account with Codex access
 - An [Inkbox](https://inkbox.ai) account for the phone number and messages
 
-Connect to the VM and run one command:
+Open a terminal on your computer or VM and run one command:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/samagra14/openinstinct/main/install.sh | bash
@@ -60,7 +62,7 @@ curl -fsSL https://raw.githubusercontent.com/samagra14/openinstinct/main/install
 
 Setup pauses twice so you can connect your ChatGPT account and create or choose your Inkbox identity. When it finishes, text `START` to the new number. Then send a normal request.
 
-The same command also works on Linux or macOS for local use.
+On a Mac or Linux computer, OpenInstinct stays available while that computer is awake.
 
 ## Good to know
 
