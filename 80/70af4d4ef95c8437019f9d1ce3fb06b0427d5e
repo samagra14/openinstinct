@@ -1,0 +1,47 @@
+install.sh
+  s_55e6bb44021ca2::t_4e32848558e53c 107
+  s_55e6bb44021ca2::t_972cb6b3e71203 153,170-175,177-188,191-192
+  s_55e6bb44021ca2::t_d344a14d1c56b2 16-17,57,75-106,108-152,154-169,176,189-190,193-194,196-204,207-209,211,233-236,316-319
+scripts/configure.py
+  s_55e6bb44021ca2::t_56590f33017a62 125-131
+  s_55e6bb44021ca2::t_3eef0d89786e0a 13-14,138
+  s_55e6bb44021ca2::t_a94d1d3622051b 21,26-30,60,70,107,110-121,137
+scripts/patch_bridge.py
+  s_55e6bb44021ca2::t_a94d1d3622051b 190-196
+README.md
+  s_55e6bb44021ca2::t_3eef0d89786e0a 78-80,83
+  s_55e6bb44021ca2::t_4e32848558e53c 43,50
+  s_55e6bb44021ca2::t_337b0209c1826a 84
+scripts/verify_overlay.py
+  s_55e6bb44021ca2::t_a94d1d3622051b 14
+scripts/test_overlay.py
+  s_55e6bb44021ca2::t_ab35f16d3495fe 1-108
+.github/workflows/verify.yml
+  s_55e6bb44021ca2::t_08a22ac3467940 1-25
+  s_55e6bb44021ca2::t_ab35f16d3495fe 26-27
+scripts/verify_release.py
+  s_55e6bb44021ca2::t_972cb6b3e71203 76-77,104-105
+  s_55e6bb44021ca2::t_4e32848558e53c 138
+  s_55e6bb44021ca2::t_a2cde25ba27c18 93-96
+  s_55e6bb44021ca2::t_ab35f16d3495fe 140-142
+  s_55e6bb44021ca2::t_08a22ac3467940 1-75,78-83,92,97-103,106-127,129-137,139,143-147
+  s_55e6bb44021ca2::t_56590f33017a62 84-91,128
+config/AGENTS.md
+  s_55e6bb44021ca2::t_972cb6b3e71203 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "8070af4d4ef95c8437019f9d1ce3fb06b0427d5e",
+  "prompts": {},
+  "sessions": {
+    "s_55e6bb44021ca2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a04084-b421-7d91-a75c-32c6c30cb427",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Samagra Sharma <samagra14@gmail.com>"
+    }
+  }
+}
