@@ -1,0 +1,38 @@
+scripts/configure.py
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-124
+README.md
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-56,60-82
+  s_55e6bb44021ca2::t_459061636ffe7f 57-59
+.gitignore
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-8
+config/codex-config.toml
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-27
+scripts/patch_bridge.py
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-202
+LICENSE
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-21
+scripts/verify_overlay.py
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-35
+config/AGENTS.md
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-17
+install.sh
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-17,19-51,53-161,164-184
+  s_55e6bb44021ca2::t_459061636ffe7f 18,52
+  s_55e6bb44021ca2::t_6ae02879b0e735 162-163
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "7220a9a3aa099c8334fee37f7a4706dbf858aec0",
+  "prompts": {},
+  "sessions": {
+    "s_55e6bb44021ca2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a04084-b421-7d91-a75c-32c6c30cb427",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": null
+    }
+  }
+}
