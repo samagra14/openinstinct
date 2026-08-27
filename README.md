@@ -1,82 +1,89 @@
+<div align="center">
+
 # OpenInstinct
 
-Your own always-on Codex agent over SMS, iMessage, email, and calls.
+### Your own AI assistant that is always on
 
-Run it on a small Ubuntu VM, text it from anywhere, and let it work inside a persistent private workspace. Local installation also works, but the agent sleeps when your computer does.
+Text it a task. It can use a real browser, search the live web, work with files, run tools, remember your conversations, and text you back when it is done.
 
-## Architecture
+**Always on** · **Real browser** · **Private workspace** · **Open source**
 
-```mermaid
-flowchart LR
-    U[You<br/>SMS, iMessage, email, calls] --> I[Inkbox]
-    I --> B[OpenInstinct bridge<br/>Ubuntu VM]
-    B --> C[Codex CLI]
-    C --> W[Private workspace]
-    C --> S[Sub-agents<br/>Luna]
-```
+</div>
 
-The bridge keeps one Codex conversation per contact. Codex can use the shell, browser, files, web search, and messaging tools in the workspace.
+<video src="https://github.com/user-attachments/assets/16968273-2fe1-4c25-ae89-a7a9413e4a72" width="100%" controls autoplay loop muted></video>
 
-## Install on a VM
+<p align="center"><em>Real demo: one text starts live research and the answer comes back in the conversation.</em></p>
 
-Start with a clean Ubuntu 24.04 VM, then run:
+## What can it do?
+
+| | OpenInstinct can... |
+| --- | --- |
+| 🌐 **Use a real browser** | Open websites, click through pages, fill forms, download things, and stay signed in for next time. |
+| 🔎 **Research the live web** | Find current information, compare options, check sources, and send you a useful answer. |
+| 📁 **Work with your files** | Read, write, organize, and turn documents, notes, reports, and spreadsheets into finished work. |
+| 🛠️ **Use tools and run tasks** | Install what it needs, run commands, test its work, fix problems, and keep going until the job is done. |
+| 🧠 **Remember your conversations** | Keep each person's conversation separate, save useful context, and pick up where you left off after a restart. |
+| 🤝 **Bring in extra help** | Split a bigger job between smaller AI helpers, then bring the result back into one clear reply. |
+| 💬 **Talk where you already talk** | Reach it by SMS, iMessage, email, or phone call. It replies quickly so you know it has started. |
+| 🌙 **Stay awake** | Run all day on a small VM, restart itself after a reboot, and keep working when your laptop is closed. |
+
+> **This is not a chatbot that only gives advice.** It can open websites, use tools, change files, and do the work for you.
+
+## Things you can ask
+
+- "Check today's AI news. Pick one story and tell me why it matters."
+- "Open the dashboard, download last month's report, and give me the key numbers."
+- "Compare these options, check the latest prices, and send me the best three."
+- "Turn the files in this folder into a short, clean brief."
+- "Keep an eye on this task. If it fails, fix it and tell me when it is done."
+- "Remember that I like short answers and morning flights."
+
+## How it works
+
+**You send a message → OpenInstinct does the work → You get the result**
+
+OpenInstinct runs quietly on a machine you control. A small Ubuntu VM is best because it stays awake. You can also run it on your own computer, but it will sleep when the computer sleeps.
+
+## Set up your own
+
+You need:
+
+- A small Ubuntu 24.04 VM
+- A ChatGPT account with Codex access
+- An [Inkbox](https://inkbox.ai) account for the phone number and messages
+
+Connect to the VM and run one command:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/samagra14/openinstinct/main/install.sh | bash
 ```
 
-There are two human checkpoints:
+Setup pauses twice so you can connect your ChatGPT account and create or choose your Inkbox identity. When it finishes, text `START` to the new number. Then send a normal request.
 
-1. Sign in to Codex with the device code.
-2. Create or connect the Inkbox identity in the setup wizard.
+The same command also works on Linux or macOS for local use.
 
-When setup finishes, text `START` to the new number. Then send a normal request.
+## Good to know
 
-## Install locally
+- Routine work runs without asking you to approve every small step.
+- It still asks before deleting important data, spending money, changing account security, or doing something hard to undo.
+- Its working memory, files, browser logins, and conversation state live on your machine. Messages pass through Inkbox.
+- Each allowed person gets a separate conversation, even when several people share the same assistant.
 
-Run the same command on Linux or macOS. Keep the computer awake while the agent is working.
-
-## Defaults
-
-- Main agent: `gpt-5.6-sol`
-- Sub-agents: `gpt-5.6-luna`
-- Routine work is auto-reviewed on the isolated machine
-- Destructive, financial, account-security, and public-exposure actions still require approval
-- Immediate SMS acknowledgment
-- Long SMS replies are split into numbered parts
-- Short, warm, plain-English replies
-- Persistent browser profile and workspace
-- Starts automatically after an Ubuntu VM reboot
-
-## Useful commands
+<details>
+<summary><strong>Need to check or restart it?</strong></summary>
 
 ```bash
 systemctl --user status openinstinct
 systemctl --user restart openinstinct
 journalctl --user -u openinstinct -f
-CODEX_HOME="$HOME/.openinstinct/codex" \
-INKBOX_CODEX_ENV_FILE="$HOME/.openinstinct/state/.env" \
-inkbox-codex doctor
 ```
 
-Text commands: `/status`, `/usage`, `/health`, `/stop`, `/new`, and `/resume`.
+You can also text `/status`, `/usage`, `/health`, `/stop`, `/new`, or `/resume`.
 
-## Security
+</details>
 
-Use a dedicated VM. Do not expose the bridge port publicly. The default Inkbox tunnel is outbound-only, and Codex stays in a workspace-write sandbox.
+## Open source
 
-Credentials live under `~/.openinstinct/` and `~/.inkbox-codex/`. They are never copied into this repository. Keep those directories private and enable MFA on the account used for Codex.
+OpenInstinct is a small open source setup that brings together Codex for the work and Inkbox for messaging. It is not affiliated with OpenAI, Inkbox, or Instinct.
 
-The broad auto-review policy is intended for an isolated personal-agent VM. Read [config/codex-config.toml](config/codex-config.toml) before using it on a shared machine.
-
-## How this is packaged
-
-This repository is a small deployment and configuration layer. It installs the official [Codex CLI](https://developers.openai.com/codex/cli), uses the documented [device login flow](https://learn.chatgpt.com/docs/auth#login-on-headless-devices), and sets the documented [sub-agent model default](https://learn.chatgpt.com/docs/agent-configuration/subagents#global-settings).
-
-Messaging is provided by Inkbox through its hosted service and public Codex bridge. Those dependencies remain under their own terms. OpenInstinct pins a tested bridge revision and applies a small reliability overlay at install time rather than redistributing the bridge.
-
-OpenInstinct is not affiliated with OpenAI, Inkbox, or Instinct.
-
-## License
-
-MIT
+[MIT License](LICENSE)
