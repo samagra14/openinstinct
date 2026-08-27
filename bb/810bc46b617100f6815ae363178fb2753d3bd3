@@ -1,0 +1,19 @@
+.github/workflows/verify.yml
+  s_55e6bb44021ca2::t_bd61275af900f4 14-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "bb810bc46b617100f6815ae363178fb2753d3bd3",
+  "prompts": {},
+  "sessions": {
+    "s_55e6bb44021ca2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a04084-b421-7d91-a75c-32c6c30cb427",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Samagra Sharma <samagra14@gmail.com>"
+    }
+  }
+}
