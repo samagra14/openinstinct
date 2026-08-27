@@ -1,0 +1,41 @@
+scripts/configure.py
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-124
+install.sh
+  s_55e6bb44021ca2::t_459061636ffe7f 18,52
+  s_55e6bb44021ca2::t_6ae02879b0e735 162-163
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-17,19-51,53-161,164-184
+LICENSE
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-21
+README.md
+  s_55e6bb44021ca2::t_459061636ffe7f 57-59
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-56,60-82
+scripts/patch_bridge.py
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-202
+scripts/verify_overlay.py
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-35
+.gitignore
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-8
+config/AGENTS.md
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-17
+config/codex-config.toml
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-27
+.github/workflows/ci.yml
+  s_55e6bb44021ca2::t_459061636ffe7f 17-27
+  s_55e6bb44021ca2::t_567de5a9c8a55e 1-16,28-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "0d6de4081d1a09522b9b7362d8ec5c77cd17c22e",
+  "prompts": {},
+  "sessions": {
+    "s_55e6bb44021ca2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a04084-b421-7d91-a75c-32c6c30cb427",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Samagra Sharma <samagra14@gmail.com>"
+    }
+  }
+}
