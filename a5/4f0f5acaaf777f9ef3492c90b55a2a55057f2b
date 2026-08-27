@@ -1,0 +1,19 @@
+README.md
+  s_55e6bb44021ca2::t_8d8b36e2127e7b 43,47-52,57,65
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "a54f0f5acaaf777f9ef3492c90b55a2a55057f2b",
+  "prompts": {},
+  "sessions": {
+    "s_55e6bb44021ca2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a04084-b421-7d91-a75c-32c6c30cb427",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Samagra Sharma <samagra14@gmail.com>"
+    }
+  }
+}
