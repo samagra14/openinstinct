@@ -1,0 +1,27 @@
+model = "gpt-5.6-sol"
+personality = "friendly"
+web_search = "live"
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+network_access = true
+
+[agents]
+enabled = true
+default_subagent_model = "gpt-5.6-luna"
+default_subagent_reasoning_effort = "low"
+max_concurrent_threads_per_session = 3
+
+[auto_review]
+policy = """
+This is a dedicated personal-agent machine. Contacts admitted by the configured messaging rules are authorized operators.
+
+Approve routine work by default, including shell commands, package installation and updates, file creation and editing inside the project workspace, browser automation using the project browser profile, outbound network access, diagnostics, logs, tests, and management or restart of the OpenInstinct user service.
+
+Require explicit approval from the active operator for destructive deletion of material data, financial transactions or purchases, account or credential security changes, exposing services or ports publicly, contacting a new third party, or other irreversible external actions.
+"""
+
+[projects."__PROJECT_DIR__"]
+trust_level = "trusted"
