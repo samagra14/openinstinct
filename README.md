@@ -40,14 +40,14 @@ Text it a task. It can use a real browser, search the live web, work with files,
 
 **You send a message → OpenInstinct does the work → You get the result**
 
-OpenInstinct can run on your Mac or Linux computer. For an assistant that stays available when your laptop is closed, we recommend a small Ubuntu 24.04 VM.
+OpenInstinct can run on your Mac or Linux computer. For an assistant that stays available when your laptop is closed, we recommend a small Intel/AMD Ubuntu 24.04 VM.
 
 ## Set up your own
 
 Choose where to run it:
 
 - Your Mac or Linux computer
-- **Recommended:** a small Ubuntu 24.04 VM that stays awake
+- **Recommended:** a small Intel/AMD Ubuntu 24.04 VM that stays awake
 
 You also need:
 
@@ -75,10 +75,12 @@ On a Mac or Linux computer, OpenInstinct stays available while that computer is 
 <summary><strong>Need to check or restart it?</strong></summary>
 
 ```bash
-systemctl --user status openinstinct
-systemctl --user restart openinstinct
-journalctl --user -u openinstinct -f
+inkbox-codex status
+inkbox-codex restart
+inkbox-codex doctor
 ```
+
+On an Ubuntu VM, logs are available with `journalctl --user -u openinstinct -f`.
 
 You can also text `/status`, `/usage`, `/health`, `/stop`, `/new`, or `/resume`.
 

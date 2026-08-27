@@ -187,6 +187,13 @@ def _codex_health() -> str:
 ''',
     )
 
+    replace_once(
+        package / "daemon.py",
+        '        f"  <dict><key>INKBOX_CODEX_ENV_FILE</key><string>{env_file}</string></dict>\\n"',
+        '        f"  <dict><key>INKBOX_CODEX_ENV_FILE</key><string>{env_file}</string>"\n'
+        '        f"<key>PATH</key><string>{os.environ.get(\'PATH\', \'\')}</string></dict>\\n"',
+    )
+
     marker = root / ".openinstinct-overlay"
     marker.write_text(f"upstream={UPSTREAM_COMMIT}\n", encoding="utf-8")
 

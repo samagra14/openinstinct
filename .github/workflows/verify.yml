@@ -1,0 +1,27 @@
+name: Verify release
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check OpenInstinct release contract
+        run: python scripts/verify_release.py
+      - name: Check the pinned messaging overlay
+        run: |
+          git clone --quiet https://github.com/inkbox-ai/codex-plugin.git "$RUNNER_TEMP/bridge"
+          git -C "$RUNNER_TEMP/bridge" checkout --quiet --detach 339d702b99eb8e50b4434f7ddb7e412047e94fb1
+          python scripts/patch_bridge.py "$RUNNER_TEMP/bridge"
+          python scripts/verify_overlay.py "$RUNNER_TEMP/bridge"
+          python -m pip install --quiet -e "$RUNNER_TEMP/bridge"
+          python scripts/test_overlay.py "$RUNNER_TEMP/bridge"

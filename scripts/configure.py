@@ -10,15 +10,23 @@ from pathlib import Path
 
 
 MANAGED_ENV = {
+    "AGENT_BROWSER_CONTENT_BOUNDARIES": "true",
+    "AGENT_BROWSER_PROFILE": None,
     "CODEX_PROJECT_DIR": None,
     "CODEX_HOME": None,
     "CODEX_MODEL": "gpt-5.6-sol",
     "CODEX_SANDBOX": "workspace-write",
     "CODEX_APPROVAL_POLICY": "on-request",
     "CODEX_APPROVALS_REVIEWER": "auto_review",
+    "CODEX_BIN": None,
     "INKBOX_CODEX_AUTO_APPROVE_INKBOX_TOOLS": "true",
     "INKBOX_SMS_ACK_ENABLED": "true",
 }
+
+LEGACY_BROWSER_INSTRUCTION = (
+    "Use live web search for current information. Use a persistent browser profile at "
+    "`browser-profile/` for interactive websites so login sessions survive restarts."
+)
 
 
 def toml_escape(value: str) -> str:
@@ -49,6 +57,7 @@ def upsert_env(path: Path, values: dict[str, str]) -> None:
 
 
 def write_service(path: Path, *, bridge_bin: Path, env_file: Path, codex_home: Path, project_dir: Path) -> None:
+    process_path = os.environ.get("PATH", "")
     content = f"""[Unit]
 Description=OpenInstinct personal agent
 After=network-online.target
@@ -58,6 +67,7 @@ Wants=network-online.target
 Type=simple
 Environment=\"INKBOX_CODEX_ENV_FILE={unit_escape(str(env_file))}\"
 Environment=\"CODEX_HOME={unit_escape(str(codex_home))}\"
+Environment=\"PATH={unit_escape(process_path)}\"
 WorkingDirectory=\"{unit_escape(str(project_dir))}\"
 ExecStart=\"{unit_escape(str(bridge_bin))}\" run
 Restart=on-failure
@@ -94,18 +104,38 @@ def main() -> None:
     (project_dir / "browser-profile").mkdir(exist_ok=True)
 
     agent_target = project_dir / "AGENTS.md"
+    agent_source = (source / "config" / "AGENTS.md").read_text(encoding="utf-8")
     if not agent_target.exists():
         shutil.copy2(source / "config" / "AGENTS.md", agent_target)
+    else:
+        existing_agents = agent_target.read_text(encoding="utf-8")
+        if LEGACY_BROWSER_INSTRUCTION in existing_agents:
+            browser_instruction = next(
+                paragraph
+                for paragraph in agent_source.split("\n\n")
+                if paragraph.startswith("Use live web search for current information.")
+            )
+            agent_target.write_text(
+                existing_agents.replace(LEGACY_BROWSER_INSTRUCTION, browser_instruction),
+                encoding="utf-8",
+            )
 
     template = (source / "config" / "codex-config.toml").read_text(encoding="utf-8")
     rendered = template.replace("__PROJECT_DIR__", toml_escape(str(project_dir)))
-    (codex_home / "config.toml").write_text(rendered, encoding="utf-8")
-    (codex_home / "config.toml").chmod(0o600)
+    config_path = codex_home / "config.toml"
+    config_backup = codex_home / "config.toml.pre-openinstinct"
+    if config_path.exists() and not config_backup.exists():
+        shutil.copy2(config_path, config_backup)
+        config_backup.chmod(0o600)
+    config_path.write_text(rendered, encoding="utf-8")
+    config_path.chmod(0o600)
 
     values = {key: value for key, value in MANAGED_ENV.items() if value is not None}
     values["CODEX_PROJECT_DIR"] = str(project_dir)
     values["CODEX_HOME"] = str(codex_home)
     values["CODEX_MODEL"] = args.model
+    values["CODEX_BIN"] = shutil.which("codex") or "codex"
+    values["AGENT_BROWSER_PROFILE"] = str(project_dir / "browser-profile")
     upsert_env(env_file, values)
 
     if args.service_file:

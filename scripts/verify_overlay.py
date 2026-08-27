@@ -11,6 +11,7 @@ from pathlib import Path
 EXPECTED = {
     "inkbox_codex/codex_client.py": "self.cfg.codex_approvals_reviewer",
     "inkbox_codex/config.py": "INKBOX_SMS_ACK_ENABLED",
+    "inkbox_codex/daemon.py": "<key>PATH</key>",
     "inkbox_codex/gateway.py": "def _split_sms_text",
     "inkbox_codex/prompts.py": "gpt-5.6-luna",
     "inkbox_codex/sessions.py": "SMS_ACK_TEXT",
